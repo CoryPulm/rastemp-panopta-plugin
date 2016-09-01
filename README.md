@@ -9,12 +9,13 @@ Panopta agent - Install and make sure to add panopta-agent user to the video gro
 <br />
 Python 2.7
 <br />
+<strong>Install</strong>
 <br />
 Just download this and drop it into your plugins folder:
 <br />
-/usr/lib/panopta-agent/plugins
+`/usr/share/panopta-agent/`
 <br />
 Then run the agent command to rebuild the metadata:
 <br />
-python /usr/bin/panopta-agent/panopta_agent.py --rebuild-metadata
+`python /usr/bin/panopta-agent/panopta_agent.py --rebuild-metadata`
 
