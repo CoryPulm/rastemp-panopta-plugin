@@ -41,16 +41,17 @@ class RPTemperaturePlugin(agent_util.Plugin):
             cpu_temp = 0
             runs = 0
             raw_temp = ''
-            while cpu_temp == 0 and runs <= 3:
+            while cpu_temp == 0 and runs < 3:
                 ret, raw_temp = agent_util.execute_command("cat /sys/class/thermal/thermal_zone0/temp")
                 t1 = float(raw_temp) / 1000
                 t2 = float(raw_temp) / 100
                 cpu_temp = float(t2 % t1)
                 runs += 1
+                self.log.error("Raw: %s - Measured: %s" % (raw_temp.strip(), cpu_temp))
                 if cpu_temp == 0:
                     self.log.warning("CPU temp of '%s' doesn't seem right. Measuring again..." % raw_temp.strip())
 
-            if runs > 3:
+            if runs >= 3:
                 self.log.error("Invalid CPU temp of '%s'. Retried 3 times and got same result!" % raw_temp.strip())
 
             return float("%.1f" % cpu_temp)
